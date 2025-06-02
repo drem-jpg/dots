@@ -2,6 +2,7 @@
 <div align="center">
   <a href="https://github.com/drem-jpg/dots">
     <img src="src/2025-06-02_01-25.png" alt="screenshot">
+    <img src="src/2025-06-02_01-24.png" alt="screenshot2">
   </a>
 
   <h3 align="center">dots</h3>
