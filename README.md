@@ -41,3 +41,8 @@ status bar: <a href="https://github.com/polybar/polybar">polybar</a>
    ```sh
    stow .
    ```
+
+### but why sxwm?
+1. its super easy to use and configure
+2. compatible with polybar, picom, etc.
+3. better than dwm imo 🤫
