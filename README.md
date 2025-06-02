@@ -13,7 +13,7 @@
 </div>
 
 ### apps i use
-terminal: <a href="https://suckless.org/st">st</a>
+terminal: <a href="https://st.suckless.org">st</a>
 
 shell: <a href="https://fishshell.com">fish</a>
   
