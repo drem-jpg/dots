@@ -22,6 +22,7 @@ mod_key : super
 # Application Launchers:
 bind : mod + Return : "st"
 bind : mod + a : "rofi -show drun"
+bind : mod + b : "qutebrowser"
 bind : mod + e : "st ranger"
 bind : mod + escape : "st 'pkill polybar; polybar & disown'"
 bind : mod + x : "~/.local/bin/power-menu.sh"
@@ -36,8 +37,6 @@ call : mod + k : focus_prev
 
 # Player controls:
 bind : mod + p : "rmpc togglepause"
-bind : mod + n : "rmpc next"
-bind : mod + b : "rmpc prev"
 
 # Master/Stack Movement
 call : mod + shift + j : master_next
