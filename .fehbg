@@ -1,2 +1,2 @@
-#!/bin/sh
-feh --no-fehbg --bg-fill --image-bg '#ffffff' '/home/max/.config/wallpapers/blue_flowers.jpg' 
+#!/usr/bin/env dash
+feh --no-fehbg --bg-fill --image-bg '#ffffff' '/home/max/Pictures/wallpapers/blue_flowers.jpg' 
