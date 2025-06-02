@@ -12,6 +12,14 @@
   </p>
 </div>
 
+### apps i use
+terminal: <a href="https://suckless.org/st"><strong>st</strong></a>
+editor: <a href="https://neovim.io"><strong>neovim</strong></a>
+browser: <a href="https://qutebrowser.org"><strong>qutebrowser</strong></a>
+music player: <a href="https://mierak.github.io/rmpc"><strong>rmpc</strong></a>
+status bar: <a href="https://github.com/polybar/polybar"><strong>polybar</strong></a>
+
+
 ### installation
 1. install gnu stow for your distro
 2. clone the repo
