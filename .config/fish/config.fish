@@ -11,6 +11,8 @@ set fish_greeting                                 # Supresses fish's intro messa
 set TERM "xterm-256color"                         # Sets the terminal type
 set EDITOR "nvim"                 # $EDITOR use Emacs in terminal
 set VISUAL "nvim"              # $VISUAL use Emacs in GUI mode
+set QT_STYLE_OVERRIDE "kvantum"			# Use kvantum for Qt
+set QT_QPA_PLATFORMTHEME "gtk2"			#Use GTK 2 for Qt
 
 ### SET MANPAGER
 ### Uncomment only one of these!
@@ -135,11 +137,12 @@ end
 
 ### ALIASES ###
 # navigation
-alias ..='cd ..'
-alias ...='cd ../..'
-alias .3='cd ../../..'
-alias .4='cd ../../../..'
-alias .5='cd ../../../../..'
+alias cd='z'
+alias ..='z ..'
+alias ...='z ../..'
+alias .3='z ../../..'
+alias .4='z ../../../..'
+alias .5='z ../../../../..'
 
 # quick dotfiles update
 alias dotspush='cd ~/dots; gitui; cd -'
@@ -257,3 +260,6 @@ starship init fish | source
 
 ### FZF INTEGRATION ###
 fzf --fish | source
+
+### ZOXIDE INTEGRATION ###
+zoxide init fish | source
