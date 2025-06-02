@@ -141,6 +141,9 @@ alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 
+# quick dotfiles update
+alias dots='cd ~/dots; gitui; cd -'
+
 # vim and emacs
 alias v='nvim'
 alias vim='nvim'
