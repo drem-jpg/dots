@@ -21,3 +21,12 @@
 # Decrease brightness
 "brightnessctl s 5%-"
     XF86MonBrightnessDown
+
+# Screenshot
+"flameshot gui"
+    Mod2 + Print
+
+# Power menu
+"power-menu.sh"
+    m:0xc + c:119
+    Control+Alt + Delete
