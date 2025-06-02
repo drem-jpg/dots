@@ -1,1 +1,0 @@
-../../../dotfiles/fish/.config/fish/conf.d/25-aliases.fish
