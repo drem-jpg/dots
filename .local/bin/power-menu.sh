@@ -25,6 +25,6 @@ case "$selected_option" in
   systemctl hibernate
   ;;
 *Logout)
-  hyprctl dispatch exit
+  pkill sxwm
   ;;
 esac
