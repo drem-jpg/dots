@@ -11,5 +11,6 @@ xset s noblank
 ~/.fehbg &
 polybar &
 xbindkeys &
+dunst &
 
 exec sxwm
