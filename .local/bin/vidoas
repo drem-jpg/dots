@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Special Thanks To: 
+# https://www.cjjackson.dev/posts/replacing-sudo-with-doas-on-arch-linux/
+
+if [ "$(id -u)" != 0 ]; then
+        doas /root/script/vidoas
+else
+        /root/script/vidoas
+fi
+

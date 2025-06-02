@@ -1,0 +1,1 @@
+../../../dotfiles/fish/.config/fish/conf.d/30-autostart.fish
