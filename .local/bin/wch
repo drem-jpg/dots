@@ -5,7 +5,7 @@
 
 # this script WILL NOT WORK if you don't have feh and rofi, please install them first
 #
-dir="/home/$USER/Pictures/wallpapers/walls/" # wallpapers folder, change it to yours, make sure that it ends with a /
+dir="/home/$USER/Pictures/walls/" # wallpapers folder, change it to yours, make sure that it ends with a /
 cd $dir
 wallpaper="none is selected" 
 set="feh --bg-fill"
