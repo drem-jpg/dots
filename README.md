@@ -13,7 +13,7 @@
 </div>
 
 ### apps i use
-terminal: <a href="https://github.com/drem-jpg/st">st</a>
+terminal: <a href="https://github.com/LukeSmithxyz/st">st</a>
 
 shell: <a href="https://fishshell.com">fish</a>
   
