@@ -22,7 +22,6 @@ mod_key : super
 # Application Launchers:
 bind : mod + Return : "st"
 bind : mod + a : "rofi -show drun"
-bind : mod + shift + s : "screenshot"
 bind : mod + e : "st ranger"
 bind : mod + escape : "st 'pkill polybar; polybar & disown'"
 bind : mod + x : "~/.local/bin/power-menu.sh"
