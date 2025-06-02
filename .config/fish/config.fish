@@ -191,6 +191,9 @@ alias pscpu='ps auxf | sort -nr -k 3'
 # Merge Xresources
 alias merge='xrdb -merge ~/.Xresources'
 
+# startx
+alias sx='startx'
+
 # git
 alias g='git'
 alias addup='git add -u'
@@ -236,13 +239,13 @@ alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 alias tb="nc termbin.com 9999"
 
 # the terminal rickroll
-alias rr='curl -sL https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
 # Mocp must be launched with bash instead of Fish!
 alias mocp="bash -c mocp"
 
 # check the weather!
-alias weather='curl -sL https://wttr.in'
+alias weather='curl -s -L https://wttr.in'
 
 ### RANDOM COLOR SCRIPT ###
 # Get this script from my GitLab: gitlab.com/dwt1/shell-color-scripts

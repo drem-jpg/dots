@@ -10,7 +10,7 @@ border_width            : 0
 master_width            : 60 # Percentage of screen width
 resize_master_amount    : 1
 snap_distance           : 5
-motion_throttle         : 120 # Set to screen refresh rate for smoothest motions
+motion_throttle         : 60 # Set to screen refresh rate for smoothest motions
 should_float            : "Thunar"
 
 # Keybinds:
@@ -36,7 +36,7 @@ call : mod + k : focus_prev
 
 # Player controls:
 bind : mod + p : "rmpc togglepause"
-bind : mod + s : "rmpc next"
+bind : mod + n : "rmpc next"
 bind : mod + b : "rmpc prev"
 
 # Master/Stack Movement

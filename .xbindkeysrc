@@ -22,9 +22,13 @@
 "brightnessctl s 5%-"
     XF86MonBrightnessDown
 
-# Screenshot
-"flameshot gui"
+# Screenshot full screen
+"flameshot screen"
     Mod2 + Print
+
+# Snip screen
+"flameshot gui"
+    F10
 
 # Power menu
 "power-menu.sh"
