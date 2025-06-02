@@ -12,5 +12,6 @@ xset s noblank
 polybar &
 xbindkeys &
 dunst &
+mpdas &
 
 exec sxwm
