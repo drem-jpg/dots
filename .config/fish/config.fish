@@ -148,6 +148,21 @@ alias .5='z ../../../../..'
 alias dotspush='cd ~/dots; gitui; cd -'
 alias dotsupdate='cd ~/dots; stow .; cd -'
 
+# lf to lfub
+alias lf='lfub'
+
+# quality of life command improvements
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -vIrf"
+alias bc="bc -ql"
+alias rsync="rsync -vrPlu"
+alias mkd="mkdir -pv"
+alias yt="yt-dlp --embed-metadata -i"
+alias yta="yt -x -f bestaudio/best"
+alias ytt="yt --skip-download --write-thumbnail"
+alias mpv="mpv --no-audio-display"
+
 # vim and emacs
 alias v='nvim'
 alias vim='nvim'
@@ -197,6 +212,11 @@ alias merge='xrdb -merge ~/.Xresources'
 # startx
 alias sx='startx'
 
+# colorize more commands
+alias diff='diff --color=auto'
+alias ccat='highlight --out-format=ansi'
+alias ip='ip -color=auto'
+
 # git
 alias g='git'
 alias addup='git add -u'
@@ -236,8 +256,16 @@ alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
 alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 alias todash="sudo chsh $USER -s /bin/dash && echo 'Now log out.'"
 
+# shorten long commands
+alias ka='killall'
+alias trem='transmission-remote'
+alias sdm='shutdown -h now'
+alias p='sudo pacman'
+alias net='nmtui'
+alias nm='neomutt'
+
 # bare git repo alias for dotfiles
-alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+alias config="/usr/bin/git --git-dir=$HOME/dots --work-tree=$HOME"
 
 # termbin
 alias tb="nc termbin.com 9999"
