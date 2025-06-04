@@ -22,6 +22,7 @@ mod_key : super
 # Application Launchers:
 bind : mod + Return : "st"
 bind : mod + a : "rofi -show drun"
+bind : mod + c : "dmenurecord"
 bind : mod + b : "qutebrowser"
 bind : mod + e : "st ranger"
 bind : mod + escape : "st 'pkill polybar; polybar & disown'"

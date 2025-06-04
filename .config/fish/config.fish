@@ -263,6 +263,7 @@ alias sdm='shutdown -h now'
 alias p='sudo pacman'
 alias net='nmtui'
 alias nm='neomutt'
+alias img='nsxiv'
 
 # bare git repo alias for dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/dots --work-tree=$HOME"
