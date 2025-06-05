@@ -1,5 +1,5 @@
 #!/usr/bin/env dash
-[[ -f ~/.Xresources ]] && merge &
+xrdb ~/.Xresources
 unset XCURSOR_THEME
 
 setxkbmap -option caps:swapescape
