@@ -5,5 +5,4 @@ else
 	. "$HOME/.xprofile"
 fi
 
-polybar &
-ssh-agent sxwm
+dbus-launch --exit-with-session sxwm

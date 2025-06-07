@@ -149,9 +149,6 @@ alias .5='z ../../../../..'
 alias dotspush='cd ~/dots; gitui; cd -'
 alias dotsupdate='cd ~/dots; stow .; cd -'
 
-# set GnuPG home
-export GNUPGHOME="$XDG_DATA_HOME/gnupg"
-
 # lf to lfub
 alias lf='lfub'
 
