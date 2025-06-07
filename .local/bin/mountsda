@@ -1,0 +1,5 @@
+#!/usr/bin/env dash
+sudo cryptsetup open /dev/sda1 drive
+sudo mount /dev/mapper/drive /mnt
+cd /mnt
+sudo su

@@ -13,16 +13,16 @@ case "$selected_option" in
   lockscreen
   ;;
 *Shutdown)
-  poweroff
+  loginctl poweroff
   ;;
 *Reboot)
-  reboot
+  loginctl reboot
   ;;
 *Suspend)
   suspend
   ;;
 *Hibernate)
-  systemctl hibernate
+  loginctl hibernate
   ;;
 *Logout)
   pkill sxwm

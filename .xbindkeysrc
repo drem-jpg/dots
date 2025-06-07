@@ -30,7 +30,6 @@
 "flameshot gui"
     F10
 
-# Power menu
-"power-menu.sh"
-    m:0xc + c:119
-    Control+Alt + Delete
+# Pulsemixer
+"st pulsemixer"
+    Mod4 + F12

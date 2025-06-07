@@ -192,4 +192,4 @@ map <c-l> unselect
 
 
 # Source Bookmarks
-source "~/.config/lf/shortcutrc"
+# source "~/.config/lf/shortcutrc"

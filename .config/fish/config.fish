@@ -8,9 +8,10 @@ set -U fish_user_paths $HOME/.bin  $HOME/.local/bin $HOME/.config/emacs/bin $HOM
 
 ### EXPORT ###
 set fish_greeting                                 # Supresses fish's intro message
-set TERM "xterm-256color"                         # Sets the terminal type
-set EDITOR "nvim"                 # $EDITOR use Emacs in terminal
-set VISUAL "nvim"              # $VISUAL use Emacs in GUI mode
+set TERMINAL "st"                         # Sets the terminal type
+set EDITOR "nvim"                 # $EDITOR use nvim in terminal
+set VISUAL "nvim"              # $VISUAL use nvim in terminal
+set BROWSER "qutebrowser" 		# $BROWSER use qutebrowser as browser
 set QT_STYLE_OVERRIDE "kvantum"			# Use kvantum for Qt
 set QT_QPA_PLATFORMTHEME "gtk2"			#Use GTK 2 for Qt
 
@@ -148,6 +149,9 @@ alias .5='z ../../../../..'
 alias dotspush='cd ~/dots; gitui; cd -'
 alias dotsupdate='cd ~/dots; stow .; cd -'
 
+# set GnuPG home
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+
 # lf to lfub
 alias lf='lfub'
 
@@ -207,10 +211,10 @@ alias psmem='ps auxf | sort -nr -k 4'
 alias pscpu='ps auxf | sort -nr -k 3'
 
 # Merge Xresources
-alias merge='xrdb -merge ~/.Xresources'
+alias merge='xrdb ~/.config/x11/xresources'
 
 # startx
-alias sx='startx'
+alias sx='startx ~/.config/x11/xinitrc'
 
 # colorize more commands
 alias diff='diff --color=auto'
@@ -264,6 +268,9 @@ alias p='sudo pacman'
 alias net='nmtui'
 alias nm='neomutt'
 alias img='nsxiv'
+alias crypt='sudo cryptsetup'
+alias mount='sudo mount'
+alias umount='sudo umount'
 
 # bare git repo alias for dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/dots --work-tree=$HOME"

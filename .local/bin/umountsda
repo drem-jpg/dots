@@ -1,0 +1,3 @@
+#!/usr/bin/env dash
+sudo umount -r /mnt
+sudo cryptsetup close drive
