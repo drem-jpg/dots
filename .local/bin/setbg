@@ -7,7 +7,7 @@
 #	If wal is installed, also generates a colorscheme.
 
 # Location of link to wallpaper link.
-bgloc="${XDG_DATA_HOME:-$HOME/.local/share}/bg"
+bgloc="$HOME/Pictures/thiemeyer_road_to_samarkand.jpg"
 
 # Configuration files of applications that have their themes changed by pywal.
 dunstconf="${XDG_CONFIG_HOME:-$HOME/.config}/dunst/dunstrc"
@@ -39,3 +39,4 @@ fi
 xwallpaper --zoom "$bgloc"
 # If running, dwm hit the key to refresh the color scheme.
 pidof dwm >/dev/null && xdotool key super+F5
+

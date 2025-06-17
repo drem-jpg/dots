@@ -3,7 +3,7 @@ configuration{
     lines: 5;
     font: "JetBrainsMono NF 14";
     show-icons: true;
-    icon-theme: "Qogir-Dark";
+    icon-theme: "Papirus-Dark";
     terminal: "st";
     drun-display-format: "{icon} {name}";
     location: 0;
@@ -16,7 +16,7 @@ configuration{
     sidebar-mode: true;
 }
 
-@theme "tokyonight"
+@theme "gruvchad"
 
 element-text, element-icon , mode-switcher {
     background-color: inherit;

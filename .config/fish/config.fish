@@ -1,5 +1,12 @@
 # Original config from Derek Taylor (DistroTube).
 
+### AUTOSTART XORG
+if status is-login
+    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+        exec startx -- -keeptty
+    end
+end
+
 ### ADDING TO THE PATH
 # First line removes the path; second line sets it.  Without the first line,
 # your path gets massive and fish becomes very slow.
@@ -11,7 +18,7 @@ set fish_greeting                                 # Supresses fish's intro messa
 set TERMINAL "st"                         # Sets the terminal type
 set EDITOR "nvim"                 # $EDITOR use nvim in terminal
 set VISUAL "nvim"              # $VISUAL use nvim in terminal
-set BROWSER "qutebrowser" 		# $BROWSER use qutebrowser as browser
+set BROWSER "librewolf" 		# $BROWSER use qutebrowser as browser
 set QT_STYLE_OVERRIDE "kvantum"			# Use kvantum for Qt
 set QT_QPA_PLATFORMTHEME "gtk2"			#Use GTK 2 for Qt
 
@@ -32,10 +39,10 @@ end
 ### END OF VI MODE ###
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
-set fish_color_normal brcyan
+set fish_color_normal brwhite
 set fish_color_autosuggestion '#7d7d7d'
-set fish_color_command brcyan
-set fish_color_error '#ff6c6b'
+set fish_color_command brgreen
+set fish_color_error brred
 set fish_color_param brcyan
 
 ### FUNCTIONS ###
@@ -145,12 +152,19 @@ alias .3='z ../../..'
 alias .4='z ../../../..'
 alias .5='z ../../../../..'
 
+# neofetch to fastfetch
+alias neofetch='fastfetch -c neofetch.jsonc'
+
 # quick dotfiles update
 alias dotspush='cd ~/dots; gitui; cd -'
 alias dotsupdate='cd ~/dots; stow .; cd -'
 
 # lf to lfub
 alias lf='lfub'
+
+# dwm config
+alias dwmedit="cd ~/dwm; v config.def.h & cp config.def.h config.h"
+alias dwmupdate="cd ~/dwm; sudo make install & cd -"
 
 # quality of life command improvements
 alias cp="cp -iv"
@@ -163,6 +177,7 @@ alias yt="yt-dlp --embed-metadata -i"
 alias yta="yt -x -f bestaudio/best"
 alias ytt="yt --skip-download --write-thumbnail"
 alias mpv="mpv --no-audio-display"
+alias bgch="nvim ~/.local/bin/setbg; setbg"
 
 # vim and emacs
 alias v='nvim'
@@ -187,10 +202,10 @@ alias unlock='sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages (DANGEROUS!)
 
 # get fastest mirrors
-alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
-alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
-alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
-alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
+alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist-arch"
+alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist-arch"
+alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist-arch"
+alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist-arch"
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
@@ -287,7 +302,10 @@ alias weather='curl -s -L https://wttr.in'
 ### RANDOM COLOR SCRIPT ###
 # Get this script from my GitLab: gitlab.com/dwt1/shell-color-scripts
 # Or install it from the Arch User Repository: shell-color-scripts
-colorscript random
+#colorscript random
+
+### FASTFETCH ###
+fastfetch -c examples/17.jsonc
 
 ### SETTING THE STARSHIP PROMPT ###
 starship init fish | source

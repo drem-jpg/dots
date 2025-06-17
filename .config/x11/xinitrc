@@ -5,4 +5,4 @@ else
 	. "$HOME/.xprofile"
 fi
 
-dbus-launch --exit-with-session sxwm
+dbus-launch ssh-agent dwm

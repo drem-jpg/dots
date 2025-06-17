@@ -2,9 +2,9 @@
 
 xrandr --dpi 96		# Set DPI. User may want to use a larger number for larger screens.
 ~/.fehbg &			# set the background with the `setbg` script
-xrdb ~/.Xresources	# Uncomment to use Xresources colors/settings on startup
+xrdb ~/.config/x11/xresources	# Uncomment to use Xresources colors/settings on startup
 
-autostart="mpd polybar picom dunst unclutter pipewire remapd xbindkeys"
+autostart="mpd picom dunst pipewire pipewire-pulse wireplumber unclutter xbindkeys slstatus transmission-daemon"
 
 
 for program in $autostart; do

@@ -22,14 +22,14 @@
 "brightnessctl s 5%-"
     XF86MonBrightnessDown
 
-# Screenshot full screen
-"flameshot screen"
-    Mod2 + Print
-
-# Snip screen
-"flameshot gui"
-    F10
-
 # Pulsemixer
-"st pulsemixer"
+"st -e pulsemixer"
     Mod4 + F12
+
+# Lf
+"st -e lf"
+    Mod4 + e
+
+# Fetch
+"st -e pfetch"
+    Mod4 + Super_L
