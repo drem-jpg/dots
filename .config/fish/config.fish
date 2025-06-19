@@ -1,12 +1,5 @@
 # Original config from Derek Taylor (DistroTube).
 
-### AUTOSTART XORG
-if status is-login
-    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-        exec startx -- -keeptty
-    end
-end
-
 ### ADDING TO THE PATH
 # First line removes the path; second line sets it.  Without the first line,
 # your path gets massive and fish becomes very slow.
@@ -21,6 +14,11 @@ set VISUAL "nvim"              # $VISUAL use nvim in terminal
 set BROWSER "librewolf" 		# $BROWSER use qutebrowser as browser
 set QT_STYLE_OVERRIDE "kvantum"			# Use kvantum for Qt
 set QT_QPA_PLATFORMTHEME "gtk2"			#Use GTK 2 for Qt
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
+export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
 
 ### SET MANPAGER
 ### Uncomment only one of these!
@@ -156,7 +154,7 @@ alias .5='z ../../../../..'
 alias neofetch='fastfetch -c neofetch.jsonc'
 
 # quick dotfiles update
-alias dotspush='cd ~/dots; gitui; cd -'
+alias dotspush='cd ~/dots; lazygit; cd -'
 alias dotsupdate='cd ~/dots; stow .; cd -'
 
 # lf to lfub
@@ -305,7 +303,7 @@ alias weather='curl -s -L https://wttr.in'
 #colorscript random
 
 ### FASTFETCH ###
-fastfetch -c examples/17.jsonc
+fastfetch -c examples/8.jsonc
 
 ### SETTING THE STARSHIP PROMPT ###
 starship init fish | source
@@ -315,3 +313,13 @@ fzf --fish | source
 
 ### ZOXIDE INTEGRATION ###
 zoxide init fish | source
+
+### SPICETIFY PATH ### 
+fish_add_path /home/max/.spicetify
+
+### AUTOSTART XORG ###
+if status is-login
+    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+        exec startx "$XINITRC" -- -keeptty
+    end
+end

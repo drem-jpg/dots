@@ -5,7 +5,7 @@
     address: "127.0.0.1:6600",
     theme: None,
     cache_dir: None,
-    lyrics_dir: "/home/max/Music/",
+    lyrics_dir: "/home/max/Media/Music/",
     on_song_change:  ["~/.config/rmpc/notify"],
 volume_step: 5,
 
