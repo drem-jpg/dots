@@ -1,7 +1,7 @@
 configuration{
     modi: "run,drun,window";
     lines: 5;
-    font: "JetBrainsMono NF 14";
+    font: "Iosevka NF 14";
     show-icons: true;
     icon-theme: "Papirus-Dark";
     terminal: "st";
@@ -9,14 +9,14 @@ configuration{
     location: 0;
     disable-history: false;
     hide-scrollbar: true;
-    display-drun: "  Apps ";
-    display-run: "  Run ";
-    display-window: " Window";
+    display-drun: "   Apps ";
+    display-run: "   Run ";
+    display-window: "  Window";
     /* display-Network: " 󰤨  Network"; */
     sidebar-mode: true;
 }
 
-@theme "gruvchad"
+@theme "onedark"
 
 element-text, element-icon , mode-switcher {
     background-color: inherit;

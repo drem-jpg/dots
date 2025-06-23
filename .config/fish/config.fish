@@ -4,7 +4,7 @@
 # First line removes the path; second line sets it.  Without the first line,
 # your path gets massive and fish becomes very slow.
 set -e fish_user_paths
-set -U fish_user_paths $HOME/.bin  $HOME/.local/bin $HOME/.config/emacs/bin $HOME/Applications /var/lib/flatpak/exports/bin/ $fish_user_paths
+set -U fish_user_paths $HOME/.local/bin /var/lib/flatpak/exports/bin/ $fish_user_paths
 
 ### EXPORT ###
 set fish_greeting                                 # Supresses fish's intro message
@@ -19,6 +19,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export WINEPREFIX="$XDG_DATA_HOME/wineprefixes/default"
 export XINITRC="$XDG_CONFIG_HOME/x11/xinitrc"
+export NEWSBOATURLS="$XDG_CONFIG_HOME/newsboat/urls"
 
 ### SET MANPAGER
 ### Uncomment only one of these!
@@ -160,6 +161,10 @@ alias dotsupdate='cd ~/dots; stow .; cd -'
 # lf to lfub
 alias lf='lfub'
 
+# ncmpcpp
+alias music='ncmpcpp'
+alias nincumpoop='ncmpcpp'
+
 # dwm config
 alias dwmedit="cd ~/dwm; v config.def.h & cp config.def.h config.h"
 alias dwmupdate="cd ~/dwm; sudo make install & cd -"
@@ -176,6 +181,7 @@ alias yta="yt -x -f bestaudio/best"
 alias ytt="yt --skip-download --write-thumbnail"
 alias mpv="mpv --no-audio-display"
 alias bgch="nvim ~/.local/bin/setbg; setbg"
+alias paruf="paru -Slq | fzf --multi --preview 'paru -Sii {1}' --preview-window=down:75% | xargs -ro paru -S"
 
 # vim and emacs
 alias v='nvim'
@@ -279,8 +285,8 @@ alias net='nmtui'
 alias nm='neomutt'
 alias img='nsxiv'
 alias crypt='sudo cryptsetup'
-alias mount='sudo mount'
-alias umount='sudo umount'
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias YT='youtube-viewer'
 
 # bare git repo alias for dotfiles
 alias config="/usr/bin/git --git-dir=$HOME/dots --work-tree=$HOME"
@@ -300,10 +306,11 @@ alias weather='curl -s -L https://wttr.in'
 ### RANDOM COLOR SCRIPT ###
 # Get this script from my GitLab: gitlab.com/dwt1/shell-color-scripts
 # Or install it from the Arch User Repository: shell-color-scripts
-#colorscript random
+colorscript random
 
-### FASTFETCH ###
-fastfetch -c examples/8.jsonc
+### FASTFETCH OR PFETCH ###
+# fastfetch -c examples/8.jsonc
+#pfetch
 
 ### SETTING THE STARSHIP PROMPT ###
 starship init fish | source
@@ -314,10 +321,7 @@ fzf --fish | source
 ### ZOXIDE INTEGRATION ###
 zoxide init fish | source
 
-### SPICETIFY PATH ### 
-fish_add_path /home/max/.spicetify
-
-### AUTOSTART XORG ###
+## AUTOSTART XORG ###
 if status is-login
     if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
         exec startx "$XINITRC" -- -keeptty

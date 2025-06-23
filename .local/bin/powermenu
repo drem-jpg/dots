@@ -3,7 +3,7 @@
 actions=$(echo -e "  Lock\n  Shutdown\n  Reboot\n  Suspend\n  Hibernate\n󰞘  Logout")
 
 # Display logout menu
-selected_option=$(echo -e "$actions" | dmenu || pkill -x dmenu)
+selected_option=$(echo -e "$actions" | dmenu || pkill -x rofi)
 
 # Perform actions based on the selected option
 case "$selected_option" in

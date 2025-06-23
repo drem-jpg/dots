@@ -45,3 +45,11 @@
 # Lf
 "st -e lf"
     Mod4 + e
+
+# Powermenu
+"powermenu"
+    Control+Alt + Delete
+
+# Mutt
+"st -e neomutt"
+    Shift+Mod4 + n
