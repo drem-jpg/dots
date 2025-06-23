@@ -129,6 +129,8 @@ XF86AudioLowerVolume
 	pactl set-sink-volume @DEFAULT_SINK@ -5%
 XF86AudioRaiseVolume
 	pactl set-sink-volume @DEFAULT_SINK@ +5%
+super + F12
+  st -e pulsemixer
 
 # media controls
 XF86AudioMute
