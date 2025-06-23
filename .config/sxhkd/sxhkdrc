@@ -124,17 +124,23 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
-# volume keys
+# volume controls
 XF86AudioLowerVolume
 	pactl set-sink-volume @DEFAULT_SINK@ -5%
 XF86AudioRaiseVolume
 	pactl set-sink-volume @DEFAULT_SINK@ +5%
 
-# media keys
+# media controls
 XF86AudioMute
   pactl set-sink-mute @DEFAULT_SINK@ toggle
 XF86AudioPlay
   playerctl play-pause
+
+# brightness controls
+XF86MonBrightnessUp
+  brightnessctl set 5%+
+XF86MonBrightnessDown
+  brightnessctl set 5%-
 
 # lockscreen
 super + x
