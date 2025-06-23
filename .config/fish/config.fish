@@ -251,6 +251,9 @@ alias push='git push origin'
 alias tag='git tag'
 alias newtag='git tag -a'
 
+# replace 'locate' with 'plocate'
+alias locate='plocate'
+
 # get error messages from journalctl
 alias jctl="journalctl -p 3 -xb"
 

@@ -145,3 +145,9 @@ XF86MonBrightnessDown
 # lockscreen
 super + x
   slock
+
+# screenshot
+super + u
+  maim -o | xclip -selection clipboard -t image/png
+super + shift + u
+  maim -s -o | xclip -selection clipboard -t image/png
