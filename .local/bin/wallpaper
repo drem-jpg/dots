@@ -2,4 +2,4 @@
 
 wallpaper=$(ls ~/Pictures/wallpapers | dmenu -i -l 50)
 
-[ $wallpaper -z ] || feh --bg-fill ~/Pictures/wallpapers/$wallpaper
+[ $wallpaper -z ] || cp ~/Pictures/wallpapers/$wallpaper ~/Pictures/wallpapers/current.jpg & xwallpaper --zoom ~/Pictures/wallpapers/$wallpaper

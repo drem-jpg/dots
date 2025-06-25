@@ -1,0 +1,37 @@
+            wallpaper_dir=~/Pictures/wallpapers
+            echo "Downloading $num wallpaper(s) from Wallhaven..."
+            count=0
+            num=10
+            while [ "$count" -lt "$num" ]; do
+                json=$(curl -s "https://wallhaven.cc/api/v1/search?sorting=random")
+                img_url=$(echo "$json" | jq -r '.data[0].path')
+
+                if [ -z "$img_url" ] || [ "$img_url" = "null" ]; then
+                    echo "Warning: Failed to retrieve image URL, skipping..."
+                    count=$((count + 1))
+                    continue
+                fi
+
+                filename="$wallpaper_dir/wallhaven-$(date +%s)-$count.${img_url##*.}"
+                curl -sL "$img_url" -o "$filename"
+
+                if [ ! -f "$filename" ]; then
+                    echo "Warning: Failed to download $img_url"
+                else
+                    echo "Saved: $filename"
+                    choice="$filename"
+                fi
+
+                count=$((count + 1))
+                sleep 1
+            done
+            ;;
+        -h)
+            show_help
+            ;;
+        *)
+            echo "Unknown option: $1" >&2
+            show_help
+            ;;
+    esac
+done

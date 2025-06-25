@@ -26,6 +26,10 @@ super + Escape
 super + alt + {q,r}
 	bspc {quit,wm -r}
 
+# merge xresources and restart polybar
+super + r
+  xrdb ~/.config/x11/xresources; pkill polybar; polybar & disown
+
 # close and kill
 super + {_,shift + }q
 	bspc node -{c,k}

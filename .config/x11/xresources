@@ -11,7 +11,7 @@
 *.borderpx: 20
 
 !! Set a default font and font size as below:
-*.font: Iosevka NFM:size=14
+*.font: IosevkaTerm NF:size=14
 
 /* name		dark	light */
 /* black	0	8 */
@@ -23,4 +23,4 @@
 /* cyan		6	14 */
 /* white	7	15 */
 
-#include "/home/max/.config/x11/themes/onedark.xresources"
+#include "/home/max/.config/x11/themes/gruvbox-material-dark.xresources"

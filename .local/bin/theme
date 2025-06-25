@@ -1,0 +1,6 @@
+#!/bin/sh
+
+currenttheme=$(sed -n '26p' ~/.config/x11/xresources)
+echo $currenttheme
+theme=$(ls ~/.config/x11/themes | dmenu -i -l 10)
+sed 's|"$currenttheme"|hiii' <~/.config/x11/xresources > ~/sed-test
