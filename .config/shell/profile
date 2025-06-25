@@ -10,6 +10,7 @@ unsetopt PROMPT_SP 2>/dev/null
 
 # Default programs:
 export EDITOR="nvim"
+export VISUAL="nvim"
 export TERMINAL="st"
 export TERMINAL_PROG="st"
 export BROWSER="librewolf"

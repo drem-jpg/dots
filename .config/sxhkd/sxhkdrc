@@ -150,7 +150,7 @@ XF86MonBrightnessDown
 
 # lockscreen
 super + x
-  slock
+  betterlockscreen
 
 # screenshot
 super + u
