@@ -5,4 +5,4 @@ else
 	. "$HOME/.xprofile"
 fi
 
-dbus-launch ssh-agent bspwm
+dbus-launch ssh-agent dwm
