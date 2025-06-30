@@ -2,7 +2,6 @@
 
 # Enable colors and starship prompt
 autoload -U colors && colors
-eval "$(starship init zsh)"
 setopt autocd		# Automatically cd into typed directory.
 stty stop undef		# Disable ctrl-s to freeze terminal.
 setopt interactive_comments
@@ -78,10 +77,12 @@ bindkey -M vicmd '^[[P' vi-delete-char
 bindkey -M vicmd '^e' edit-command-line
 bindkey -M visual '^[[P' vi-delete
 
-# Set up fzf key bindings and fuzzy completion
+# Source prompt, etc.
 source <(fzf --zsh)
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
 
-# Load zsh plugins
+# Load zsh plugins; should be last.
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh 2>/dev/null
 #source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh 2>/dev/null
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null

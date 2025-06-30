@@ -4,7 +4,7 @@ xrandr --dpi 96		# Set DPI. User may want to use a larger number for larger scre
 xwallpaper --zoom ~/Pictures/wallpapers/current.jpg &			# set the background with the `setbg` script
 xrdb ~/.config/x11/xresources	# Uncomment to use Xresources colors/settings on startup
 
-autostart="mpd mpdas picom dunst pipewire pipewire-pulse wireplumber unclutter remapd dwmblocks"
+autostart="mpd mpdas picom dunst pipewire pipewire-pulse wireplumber unclutter remapd dwmblocks sxhkd"
 
 
 for program in $autostart; do

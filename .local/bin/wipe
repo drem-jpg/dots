@@ -1,0 +1,4 @@
+#!/bin/sh
+# Simple script to completely wipe a hard drive.
+choice=$(ls /dev/sd* | dmenu -i -l 10)
+sudo dd if=/dev/zero of=$choice status=progress bs=4096

@@ -78,7 +78,5 @@ if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
   exec startx ~/.config/x11/xinitrc 2>/dev/null
 fi
 
-# Set man page.
-
 # Exec colorscript when done with everything else.
 colorscript random

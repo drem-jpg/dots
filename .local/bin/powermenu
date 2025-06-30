@@ -23,6 +23,6 @@ case "$selected_option" in
   loginctl hibernate
   ;;
 *Logout)
-  pkill dwm
+  st -e pkill -KILL -u "$USER"
   ;;
 esac

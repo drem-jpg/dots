@@ -1,84 +1,123 @@
-#!/bin/sh
+# -*- mode: sh -*-
+# vim: filetype=sh
+# Aliases
+alias cd="z"
+alias ce="zi"
+alias grep="grep --color=always"
+alias ip="ip -color=auto"
+alias ls="exa --icons=never --long"
+alias sl="ls" # Lord have mercy
+alias la="ls -la"
+alias l="ls -l"
+alias ll="ls -ll"
+alias lf="lfub"
+alias rm="rm -vI"
+alias rsync="rsync -vrPlu"
+alias mkdir="mkdir -pv"
+alias nf="fastfetch -c neofetch.jsonc"
+alias ff="fastfetch"
+alias dots="cd ~/dotfiles"  # Change this to whatever your dotfile dir is, if you have one
+alias ..="cd .."
+#alias hx="helix" # Does not work on void linux
+alias p="paru" # paru
+alias r="doas paru -Rns" # remove
+alias jr="doas paru -R" # just remove
+alias lp="paru -Q" # List packages
+alias us="paru -Syu" # update system
+alias bm="$EDITOR $HOME/.local/share/bookmarks"
+alias v="nvim"
+alias vac="nvim $HOME/.config/shell/aliasrc"
+alias eac="$EDITOR $HOME/.config/shell/aliasrc"
+alias vawc="nvim $HOME/.config/awesome"
+alias eawc="$EDITOR $HOME/.config/awesome"
+alias sk="screenkey --no-systray -p fixed -g 25%x8%+1430+950 --font-size small --opacity 0.6 --key-mode composed --mods-mode normal --no-whitespace"
+alias xi='doas xbps-install'
+alias xu='doas xbps-install -Su'
+alias xv='doas xbps-install -Suv'
+alias xf='doas xbps-install -f'
+alias xr='doas xbps-remove'
+alias xo='doas xbps-remove -oO'
+alias xc='doas xbps-remove -Oo'
+alias xs='xbps-query -Rs'
+alias xq='xbps-query'
+alias xl='xbps-query -l'
+alias xw='xbps-query -f'
+alias xO='xbps-query -O'
+alias xx='xbps-query -x'
+alias xb='cd /usr/void-packages && ./xbps-src pkg'
+alias ga="git add"
+alias gc="git commit -m '$1'"
+alias gcm="git commit"
+alias gp="git push"
+alias emr="killall emacs && emacs --daemon"
+alias emc="emacsclient"
+alias emcc="emacsclient -c"
+alias c="tcc -run $1"
+alias acr=". ~/.config/shell/aliasrc"
+alias syncpkgs='{
+  echo "[pkgs]"
+  xbps-query -m | sed "s/-[0-9][^ ]*//" | sort | awk '\''{ printf "%s = true\n", $1 }'\''
+} > "$HOME/dotfiles/bootstrap/VoidLinux/packages/pkgs.toml"'
+#alias sp="syncpkgs"
+alias sp="xbps-query -m | sed 's/-[0-9][^ ]*//' | sort > ~/.packages.list"
+alias spr="~/dotfiles/bootstrap/VoidLinux/packages/get_pkgs $HOME/dotfiles/bootstrap/VoidLinux/packages/pkgs.toml" 
+alias pm="doas vpm"
+alias ffmore="ff -c examples/26"
+alias h='history'
+alias please='doas' # just for fun
+alias path='echo $PATH | tr ":" "\n"'
+alias cls='clear'
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias mkdirp='mkdir -p'
+alias cpv='cp -v'
+alias rmf='rm -rf'
+alias rmd='rm -r'
+alias sz='du -sh * | sort -h' # sort dir size
+alias top10='du -sh * | sort -rh | head -n 10'
+alias cleanpac='doas xbps-remove -Oo && doas xbps-remove -oO'
+alias journal='journalctl -p 3 -xb' # show errors only
+alias psg='ps aux | grep -i' # usage: psg firefox
+alias killport='f(){ doas kill -9 $(lsof -t -i:$1); }; f' # usage: killport 3000
+alias ports='ss -tulpn'
+alias ipinfo='curl ipinfo.io'
+alias pingg='ping 1.1.1.1'
+alias speed='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -'
+alias gs='git status'
+alias gl='git log --oneline --graph --decorate'
+alias gd='git diff'
+alias gco='git checkout'
+alias gr='git restore'
+alias grs='git restore --staged'
+alias mem='free -h'
+alias cpu='lscpu'
+alias disk='lsblk -o NAME,SIZE,TYPE,MOUNTPOINT'
+alias usage='df -h'
+alias temps='sensors'
+alias xcolors='xrdb -query'
+alias reloadx='xrdb ~/.Xresources'
+alias pic='nsxiv -a' # image previewer
+alias check='notify-send "Finding Errors in Qtile" "Check the terminal for errors"; qtile check'
+alias scripts='cd $HOME/.local/bin'
+alias mk='doas make clean install'
+alias vim='nvim'
+alias chom='chmod'
+alias gerp='grep'
+alias 11q='sed 11q'
+alias sac='. ~/.config/shell/aliasrc'
+alias yt="yt-dlp --embed-metadata -i"
+alias yta="yt -x -f bestaudio/best"
+alias ytt="yt --skip-download --write-thumbnail" \lias sw='devour'
 
-# Use neovim for vim if present.
-[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+# Configuration Files
+alias cdwm='nvim ~/.config/suckless/dwm/config.h'
+alias cst='nvim ~/.config/suckless/st/config.h'
+alias cdb='nvim ~/.local/src/dwmblocks/config.h'
+alias cdm='nvim ~/.local/src/dmenu/config.h'
 
-# Use $XINITRC variable if file exists.
-[ -f "$XINITRC" ] && alias startx='startx $XINITRC'
-
-[ -f "$MBSYNCRC" ] && alias mbsync='mbsync -c $MBSYNCRC'
-
-# sudo not required for some system commands
-for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
-	alias $command="sudo $command"
-done; unset command
-
-se() {
-	choice="$(find ~/.local/bin -mindepth 1 -printf '%P\n' | fzf)"
-	[ -f "$HOME/.local/bin/$choice" ] && $EDITOR "$HOME/.local/bin/$choice"
-	}
-
-# Verbosity and settings that you pretty much just always are going to want.
-alias \
-	cp="cp -iv" \
-	mv="mv -iv" \
-	rm="rm -vI" \
-	bc="bc -ql" \
-  df="df -h" \
-  free="free -m" \
-  locate="plocate" \
-	rsync="rsync -vrPlu" \
-	mkd="mkdir -pv" \
-	yt="yt-dlp --embed-metadata -i" \
-	yta="yt -x -f bestaudio/best" \
-	ytt="yt --skip-download --write-thumbnail" \
-	ffmpeg="ffmpeg -hide_banner" \
-  v="nvim" \
-  vim="nvim" \
-  mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist-arch" \
-
-# Colorize commands when possible.
-alias \
-	ls="eza -al --color=always --group-directories-first" \
-  la="eza -a --color=always --group-directories-first" \
-  ll="eza -l --color=always --group-directories-first" \
-  lt="eza -aT --color=always --group-directories-first" \
-	grep="grep --color=auto" \
-	diff="diff --color=auto" \
-	ccat="highlight --out-format=ansi" \
-	ip="ip -color=auto"
-
-# These common commands are just too long! Abbreviate them.
-alias \
-	ka="killall" \
-	g="git" \
-  merge="xrdb ~/.config/x11/xresources" \
-	trem="transmission-remote" \
-	YT="youtube-viewer" \
-	sdn="shutdown -h now" \
-	e='$EDITOR' \
-	v='$EDITOR' \
-	p="sudo pacman" \
-	xi="sudo xbps-install" \
-	xr="sudo xbps-remove -R" \
-	xq="xbps-query" \
-	z="zathura" \
-  paruf="paru -Slq | fzf --multi --preview 'paru -Sii {1}' --preview-window=down:75% | xargs -ro paru -S" \
-
-# Better commands for ps.
-alias \
-  psa="ps auxf" \
-  psgrep="ps aux | grep -v grep | grep -i -e VSZ -e" \
-  psmem="ps auxf | sort -nr -k 4" \
-  pscpu="ps auxf | sort -nr -k 3" \
-
-# Miscellaneous commands.
-alias \
-  tb="nc termbin.com 9999" \
-  weather="curl -sL https://wttr.in" \
-  rr="curl -sL https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash"
-
-alias \
-	lf="lfub" \
-	magit="nvim -c MagitOnly" \
-	ref='shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutenvrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc'
+# Make these sudo required commands use sudo automatically!
+alias shutdown='sudo shutdown'
+alias poweroff='sudo poweroff'
+alias reboot='sudo reboot'
+alias timeshift='sudo timeshift'
+alias timeshift-gtk='sudo timeshift-gtk'

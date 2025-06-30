@@ -2,6 +2,4 @@
 
 wallpaper=$(ls ~/Pictures/wallpapers | dmenu -i -l 40)
 
-[ $wallpaper -z ] || cp ~/Pictures/wallpapers/$wallpaper ~/Pictures/wallpapers/current.jpg & xwallpaper --zoom ~/Pictures/wallpapers/$wallpaper
-wal -i ~/Pictures/wallpapers/$wallpaper
-xdotool key ctrl+super+z
+[ $wallpaper -z ] || cp ~/Pictures/wallpapers/$wallpaper ~/Pictures/wallpapers/current.jpg & xwallpaper --zoom ~/Pictures/wallpapers/$wallpaper & wal -i ~/Pictures/wallpapers/$wallpaper; xdotool key ctrl+super+z
