@@ -1,0 +1,2 @@
+#!/bin/sh
+tac ~/.local/share/parcellite/history | dmenu -i -l 40 | xclip -selection clipboard

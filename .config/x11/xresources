@@ -11,7 +11,7 @@
 *.borderpx: 20
 
 !! Set a default font and font size as below:
-*.font: IosevkaTerm NF:size=14
+*.font: Iosevka NF:size=14
 dmenu.font: mono:size=14
 
 /* name		dark	light */

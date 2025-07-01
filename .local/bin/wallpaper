@@ -1,5 +1,155 @@
 #!/bin/sh
+#vim: filetype=sh
 
-wallpaper=$(ls ~/Pictures/wallpapers | dmenu -i -l 40)
+# Boolean types help:
+# 0 - false
+# 1 - true
 
-[ $wallpaper -z ] || cp ~/Pictures/wallpapers/$wallpaper ~/Pictures/wallpapers/current.jpg & xwallpaper --zoom ~/Pictures/wallpapers/$wallpaper & wal -i ~/Pictures/wallpapers/$wallpaper; xdotool key ctrl+super+z
+DBG_MODE=0 # Debug Mode
+
+if [ "$DBG_MODE" -eq 1 ];
+then
+    set -x
+fi
+
+
+# config
+wallpaper_dir="$HOME/Pictures/wallpapers"
+random_dir="$wallpaper_dir/random"
+file="$wallpaper_dir/current.jpg"
+default_wall="$HOME/.local/share/default-wallpaper.jpg"
+shuffle=0
+pywal=1
+
+mkdir -p "$random_dir"
+
+# default: no choice yet
+choice=""
+
+show_help() {
+    echo "Usage: $(basename "$0") [OPTIONS]"
+    echo ""
+    echo "Options:"
+    echo "  -f <file>       Use specified file as wallpaper"
+    echo "  -d              Use default wallpaper"
+    echo "  -r              Use random wallpaper"
+    echo "  -c              Restore wallpaper"
+    echo "  -s true|false   Enable or disable shuffle"
+    echo "  --online <num>  Download <num> random wallpapers from Wallhaven"
+    echo "  -h              Show this help message"
+    exit 0
+}
+
+# parse args
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -f)
+            if [ -f "$2" ]; then
+                choice="$2"
+                shift 2
+            else
+                echo "Error: '$2' is not a valid file." >&2
+                exit 1
+            fi
+            ;;
+        -d)
+            choice="$default_wall"
+            shift
+            ;;
+        -c)
+	    xwallpaper --zoom "$file"
+            shift
+            ;;
+		-r)
+			choice=$(find "$wallpaper_dir" -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' -o -iname '*.webp' \) | shuf -n 1)
+			cp "$choice" "$file"
+	    xwallpaper --zoom "$file"
+	    shift
+		;;
+        -s)
+            case "$2" in
+                true) shuffle=1 ;;
+                false) shuffle=0 ;;
+                *) echo "Error: Invalid shuffle option '$2'. Use 'true' or 'false'." >&2; exit 1 ;;
+            esac
+            shift 2
+            ;;
+        --online)
+            if ! echo "$2" | grep -Eq '^[0-9]+$'; then
+                echo "Error: '--online' requires a numeric argument." >&2
+                exit 1
+            fi
+            num="$2"
+            shift 2
+
+            echo "Downloading $num wallpaper(s) from Wallhaven..."
+            count=0
+            while [ "$count" -lt "$num" ]; do
+                json=$(curl -s "https://wallhaven.cc/api/v1/search?sorting=random")
+                img_url=$(echo "$json" | jq -r '.data[0].path')
+
+                if [ -z "$img_url" ] || [ "$img_url" = "null" ]; then
+                    echo "Warning: Failed to retrieve image URL, skipping..."
+                    count=$((count + 1))
+                    continue
+                fi
+
+                filename="$random_dir/wallhaven-$(date +%s)-$count.${img_url##*.}"
+                curl -sL "$img_url" -o "$filename"
+
+                if [ ! -f "$filename" ]; then
+                    echo "Warning: Failed to download $img_url"
+                else
+                    echo "Saved: $filename"
+                    choice="$filename"
+                fi
+
+                count=$((count + 1))
+                sleep 1
+            done
+            ;;
+        -h)
+            show_help
+            ;;
+        *)
+            echo "Unknown option: $1" >&2
+            show_help
+            ;;
+    esac
+done
+
+# if still no choice, open nsxiv
+if [ -z "$choice" ]; then
+    img_list=$(find "$wallpaper_dir" -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' -o -iname '*.webp' \))
+    if [ "$shuffle" -eq 1 ]; then
+        choice=$(echo "$img_list" | shuf | nsxiv -f -to -)
+    else
+        choice=$(echo "$img_list" | nsxiv -f -to -)
+    fi
+fi
+
+# fallback to existing wallpaper if no selection made
+if [ -z "$choice" ]; then
+    xwallpaper --zoom "$file"
+    exit 0
+fi
+
+# apply wallpaper
+cp "$choice" "$file"
+xwallpaper --zoom "$file"
+
+# If Pywal is installed, run it on the wallpaper
+if command -v wal; then
+	if [ "$pywal" -gt 0 ]; then
+	    wal -i "$choice" -n
+	xdotool key ctrl+super+z
+	    cp ~/.cache/wal/colors-wal-dmenu.h ~/.config/suckless/dmenu/pywal.h
+#	    cd ~/.local/src/dmenu; sudo make clean install; cd -
+	    cp ~/.cache/wal/dunstrc ~/.config/dunst/dunstrc;
+	    pkill dunst; dunst
+	fi
+fi
+
+# notif
+pidof dunst || dunst; 
+notify-send "[🖼 chwall]" "wallpaper changed successfully";

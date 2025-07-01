@@ -1,2 +1,2 @@
 #!/bin/sh
-fortune -s
+fortune -san 30

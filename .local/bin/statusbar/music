@@ -1,39 +1,19 @@
 #!/bin/sh
 
-# playerctl loop ensures that when a track is skipped in the music player itself, it still updates on bar
-pidof -x playerctl-loop >/dev/null 2>&1 || playerctl-loop >/dev/null 2>&1 &
+filter() { sed "/^volume:/d;s/\\[paused\\].*/⏸/g;/\\[playing\\].*/d;/^ERROR/Q" | paste -sd ' ' -;}
 
-# format state to alternate between artist - title and album - title
-FORMAT_FILE="/tmp/dwmblocks_mus_format"
-[ ! -f "$FORMAT_FILE" ] && echo "0" > "$FORMAT_FILE"
-read FORMAT < "$FORMAT_FILE"
-
-# priority is: if browser or mpv are playing, they will display. otherwise, mpd displays, playing or paused.
-# browser and mpv should never display if paused.
-if [ -z "$MUSIC_PLAYING_PLAYERS" ]; then
-	# if MUSIC_PLAYING_PLAYERS is not set, use the default players
-	MUSIC_PLAYING_PLAYERS="chromium mpd mpv"
-fi
-
-[ "$FORMAT" -eq 0 ] && META="{{ trunc(artist,17) }} - {{ trunc(title,17) }}" || META="{{ trunc(album,17) }} - {{ trunc(title,17) }}"
-
-for PLAYER in $MUSIC_PLAYING_PLAYERS; do
-# if the player is not playing, continue to the next player, until we find one that is playing
-	[ "$(playerctl --player=$PLAYER status 2>/dev/null)" != "Playing" ] && continue
-		ICON=" "
-		echo "$ICON"$(playerctl metadata --player $PLAYER --format "$META")
-done
-
-# just display what's paused in mpd, in case nothing is playing
-ICON="❚❚ "
-echo "$ICON"$(playerctl metadata --player mpd --format "$META")
-
+pidof -x sb-mpdup >/dev/null 2>&1 || sb-mpdup >/dev/null 2>&1 &
 
 case $BLOCK_BUTTON in
-		1) echo "$(( ($FORMAT + 1) % 2 ))" > "$FORMAT_FILE" ;;
-		2) playerctl --player mpd play-pause; pkill -RTMIN+11 "${STATUSBAR:-dwmblocks}" ;;
-		3) setsid -w -f "$TERMINAL" -e pulsemixer; pkill -RTMIN+11 "${STATUSBAR:-dwmblocks}" ;;
-		4) amixer -D pulse sset Master 10%+ ;;
-		5) amixer -D pulse sset Master 10%- ;;
-		6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
+	1) mpc status | filter ; setsid -f "$TERMINAL" -e ncmpcpp ;;  # right click, pause/unpause
+	2) mpc toggle | filter ;;  # right click, pause/unpause
+	3) mpc status | filter ; notify-send "🎵 Music module" "\- Shows mpd song playing.
+- ⏸ when paused.
+- Left click opens ncmpcpp.
+- Middle click pauses.
+- Scroll changes track.";;  # right click, pause/unpause
+	4) mpc prev   | filter ;;  # scroll up, previous
+	5) mpc next   | filter ;;  # scroll down, next
+	6) mpc status | filter ; setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
+	*) mpc status | filter ;;
 esac
