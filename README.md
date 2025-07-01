@@ -1,4 +1,5 @@
 <br />
+<h1 align="center">CURRENTLY DEPRECATED.</h1>
 <div align="center">
   <a href="https://github.com/drem-jpg/dots">
     <img src="src/2025-06-02_01-25.png" alt="screenshot">
